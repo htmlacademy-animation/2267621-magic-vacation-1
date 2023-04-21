@@ -300,9 +300,8 @@
 .page-header__social {
   margin-left: 4.8rem;
   opacity: 0;
-  transition: opacity $main-duration;
-  animation-name: squashAndStretch;
-  animation-duration: $main-duration;
+  transform: scale3d(0, 0, 0);
+  transition: opacity $main-duration, transform $main-duration cubic-bezier(.6,-0.25,.34,1.51);
 
 
   @media (min-width: $stop-scaling) {
@@ -328,6 +327,7 @@
 
   .page-header__social {
     opacity: 1;
+    transform: scale3d(1, 1, 1);
   }
 
   .page-header__menu {
@@ -338,34 +338,4 @@
       }
     }
   }
-}
-
-@keyframes squashAndStretch {
-  from {
-  transform: scale3d(0, 0, 0);
-}
-
-30% {
-  transform: scale3d(0.25, 0.25, 0.25);
-}
-
-40% {
-  transform: scale3d(0.50, 0.5, 0.50);
-}
-
-50% {
-  transform: scale3d(0.75, 0.75, 0.75);
-}
-
-65% {
-  transform: scale3d(1, 1, 1);
-}
-
-75% {
-  transform: scale3d(1.25, 1.25, 1.25);
-}
-
-to {
-  transform: scale3d(1, 1, 1);
-}
 }
