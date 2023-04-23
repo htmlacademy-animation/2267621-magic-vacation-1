@@ -1,10 +1,14 @@
 import throttle from 'lodash/throttle';
 
+const rulesPage = 3;
+
 export default class FullPageScroll {
   constructor() {
     this.THROTTLE_TIMEOUT = 1000;
     this.scrollFlag = true;
     this.timeout = null;
+    this.rulesLink = document.querySelector(`.rules__link`);
+    this.rulesItems = document.querySelectorAll(`.rules__item`);
 
     this.screenElements = document.querySelectorAll(`.screen:not(.screen--result)`);
     this.menuElements = document.querySelectorAll(`.page-header__menu .js-menu-link`);
@@ -60,6 +64,21 @@ export default class FullPageScroll {
     setTimeout(() => {
       this.screenElements[this.activeScreen].classList.add(`active`);
     }, 100);
+    if (this.activeScreen !== rulesPage) {
+      this.rulesItems.forEach((el) => {
+        el.classList.remove(`active`);
+      });
+      this.rulesLink.classList.remove(`active`);
+    } else {
+      this.rulesItems.forEach((el) => {
+        setTimeout(() => {
+          el.classList.add(`active`);
+        }, 250);
+        setTimeout(() => {
+          this.rulesLink.classList.add(`active`);
+        }, 1150);
+      });
+    }
   }
 
   changeActiveMenuItem() {
